@@ -1,26 +1,19 @@
 function solution(n, arr1, arr2) {
-    let resultArr1 = Array(n).fill().map(()=>[])
-    let cArr1 = arr1.map((item)=> item.toString(2).padStart(n,'0'))
-    let cArr2 = arr2.map((item)=> item.toString(2).padStart(n,'0'))
+    let arr = []
+    let resultArr = Array(n).fill().map(()=>[])
     for(let i=0; i<n;i++){
+        arr.push((arr1[i] | arr2[i]).toString(2).padStart(n,' '))
+    }
+    
+    for(let i=0; i<n; i++){
         for(let j=0; j<n; j++){
-            if(cArr1[i][j] === '1' || cArr2[i][j] === '1'){
-                resultArr1[i][j] = '1'
+            if(arr[i][j] === '1'){
+                resultArr[i].push('#')
             }
             else{
-                resultArr1[i][j] = '0'
+                resultArr[i].push(' ')
             }
         }
     }
-    let resultArr2 = resultArr1.map((lineArr)=> lineArr.map((element)=>{
-        if(element === '1'){
-            return '#'
-        }
-        else{
-            return ' '
-        }
-    })).map((lineArr)=> lineArr.join(''))
-    
-    return(resultArr2)
-    
+    return(resultArr.map((item)=> item.join('')))
 }
